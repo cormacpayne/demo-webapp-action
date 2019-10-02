@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-    const sourceDirectory = core.getInput('source-directory');
+    var sourceDirectory = core.getInput('source-directory');
     if (!sourceDirectory || sourceDirectory.length === 0) {
         sourceDirectory = process.env.GITHUB_WORKSPACE
     }
