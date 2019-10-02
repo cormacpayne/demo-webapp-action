@@ -10,11 +10,11 @@ try {
     console.log(`Using source directory "${sourceDirectory}"`);
     console.log(`Using language "${language}"`);
     if (!language || language.length === 0) {
-        // core.setOutput('command', `oryx build ${sourceDirectory}`);
-        core.setOutput('command', 'oryx build --help');
+        // core.setOutput('command', `docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build /repo`);
+        core.setOutput('command', `docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build --help`);
     } else {
-        // core.setOutput(`command', 'oryx build ${sourceDirectory} --platform ${language}`);
-        core.setOutput('command', 'oryx build --help');
+        // core.setOutput(`command', 'docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build /repo --platform ${language}`);
+        core.setOutput('command', `docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build --help`);
     }
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`The event payload: ${payload}`);
