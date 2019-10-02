@@ -1,0 +1,15 @@
+name: 'Oryx Demo Action'
+description: 'Build and deploy an Azure WebApp'
+inputs:
+  source-directory:
+    description: 'The source directory of the repository.'
+    required: false
+  language:
+    description: 'The platform language of the web app.'
+    required: false
+outputs:
+  temp:
+    description: 'TBD'
+runs:
+  using: 'node12'
+  main: 'index.js'

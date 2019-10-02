@@ -6,8 +6,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
-    - name: Pulling Oryx Docker image
-      uses: docker://docker.io/oryxprod/build:latest
+    - name: Running Oryx
+      uses: ./
+#    - name: Pulling Oryx Docker image
+#      uses: docker://docker.io/oryxprod/build:latest
