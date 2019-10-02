@@ -1,5 +1,5 @@
-FROM node:slim
+FROM alpine:latest
 
-COPY . .
+COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT [ "node", "/index.js" ]
+ENTRYPOINT [ "/entrypoint.sh" ]

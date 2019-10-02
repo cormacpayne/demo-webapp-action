@@ -4,7 +4,7 @@ branding:
   icon: cloud
   color: white
 inputs:
-  source-directory:
+  sourceDirectory:
     description: 'The source directory of the repository.'
     required: false
   language:
@@ -13,3 +13,5 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.args }}
