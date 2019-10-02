@@ -1,5 +1,8 @@
 name: 'Oryx Demo Action'
 description: 'Build and deploy an Azure WebApp'
+branding:
+  icon: cloud
+  color: white
 inputs:
   source-directory:
     description: 'The source directory of the repository.'
@@ -7,9 +10,6 @@ inputs:
   language:
     description: 'The platform language of the web app.'
     required: false
-outputs:
-  command:
-    description: 'The Oryx command to run.'
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: 'docker'
+  image: 'Dockerfile'

@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const child_process = require('child_process')
 
 try {
     var sourceDirectory = core.getInput('source-directory');
@@ -9,13 +10,23 @@ try {
     const language = core.getInput('language');
     console.log(`Using source directory "${sourceDirectory}"`);
     console.log(`Using language "${language}"`);
+    var command = `docker pull docker.io/oryxprod/build:latest`;
     if (!language || language.length === 0) {
-        // core.setOutput('command', `docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build /repo`);
-        core.setOutput('command', `docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build --help`);
+        command += `&& docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build --help`; // /repo`;
     } else {
-        // core.setOutput(`command', 'docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build /repo --platform ${language}`);
-        core.setOutput('command', `docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build --help`);
+        command += `&& docker run --volume ${sourceDirectory}:/repo 'docker.io/oryxprod/build:latest' oryx build --help`; // /repo --platform ${language}`
     }
+    console.log(`Running command '${command}'`);
+    var runCommand = child_process.exec(`${command}`, function(error, stdout, stderr) {
+        console.log(stdout);
+        if (stderr && stderr.length !== 0) {
+            console.log(`stderr: ${stderr}`);
+        }
+        if (error !== null) {
+            console.log(`error: ${error}`);
+        }
+    });
+    runCommand();
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`The event payload: ${payload}`);
 } catch (error) {

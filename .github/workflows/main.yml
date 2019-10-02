@@ -8,11 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Pulling Oryx Docker image
-      uses: docker://docker.io/oryxprod/build:latest
-    - name: Building Oryx command
+    - name: Pulling down repository
+      uses: actions/checkout@v1
+    - name: Building and running Oryx
       uses: ./
-      id: oryx
-    - name: Running Oryx command
-      run: ${{ steps.oryx.outputs.command }}
