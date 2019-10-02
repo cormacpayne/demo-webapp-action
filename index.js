@@ -10,9 +10,11 @@ try {
     console.log(`Using source directory "${sourceDirectory}"`);
     console.log(`Using language "${language}"`);
     if (!language || language.length === 0) {
-        core.setOutput('temp', `Running command "oryx build ${sourceDirectory}"`);
+        // core.setOutput('command', `oryx build ${sourceDirectory}`);
+        core.setOutput('command', 'oryx build --help');
     } else {
-        core.setOutput(`temp', 'Running command "oryx build ${sourceDirectory} --platform ${language}"`);
+        // core.setOutput(`command', 'oryx build ${sourceDirectory} --platform ${language}`);
+        core.setOutput('command', 'oryx build --help');
     }
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`The event payload: ${payload}`);

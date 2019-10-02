@@ -8,8 +8,8 @@ inputs:
     description: 'The platform language of the web app.'
     required: false
 outputs:
-  temp:
-    description: 'TBD'
+  command:
+    description: 'The Oryx command to run.'
 runs:
   using: 'node12'
   main: 'index.js'

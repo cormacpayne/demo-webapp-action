@@ -9,7 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Running Oryx
+    - name: Pulling Oryx Docker image
+      uses: docker://docker.io/oryxprod/build:latest
+    - name: Building Oryx command
       uses: ./
-#    - name: Pulling Oryx Docker image
-#      uses: docker://docker.io/oryxprod/build:latest
+      id: oryx
+    - name: Running Oryx command
+      run: ${{ steps.oryx.outputs.command }}
