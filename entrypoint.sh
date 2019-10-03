@@ -1,5 +1,6 @@
 #!/bin/sh -l
 
+oryxCommand = "oryx build --help"
 if [ -n "$1" ]
 then
     echo "Source directory provided: '$1'"
@@ -14,4 +15,4 @@ else
     echo "No language provided."
 fi
 
-echo $PWD
+docker pull mcr.microsoft.com/oryx/build
