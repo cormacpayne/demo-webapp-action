@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
-sourceDirectory = $1
-language = $2
+sourceDirectory=$1
+language=$2
 
 if [ -n "$sourceDirectory" ]
 then
