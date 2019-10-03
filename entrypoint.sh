@@ -2,7 +2,6 @@
 
 sourceDirectory=$1
 language=$2
-oryxCommand="'docker.io/oryxprod/build:slim' oryx build /repo"
 
 if [ -n "${sourceDirectory}" ]
 then
@@ -12,7 +11,7 @@ else
     sourceDirectory=$PWD
 fi
 
-oryxCommand="docker run --volume ${sourceDirectory}:/repo ${oryxCommand}"
+oryxCommand="oryx build ${sourceDirectory}"
 
 if [ -n "$language" ]
 then
