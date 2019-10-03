@@ -13,3 +13,5 @@ then
 else
     echo "No language provided."
 fi
+
+oryx build --help
