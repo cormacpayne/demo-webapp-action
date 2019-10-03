@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if [ -n "$INPUT_SOURCEDIRECTORY" ]
 then
     echo "Source directory provided: '$INPUT_SOURCEDIRECTORY'"
