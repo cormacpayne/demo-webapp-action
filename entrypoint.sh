@@ -22,5 +22,4 @@ else
     echo "No language provided."
 fi
 
-echo "Preparing to run Oryx command: ${oryxCommand}"
-# eval $oryxCommand
+eval $oryxCommand
