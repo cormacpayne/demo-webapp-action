@@ -1,15 +1,18 @@
 #!/bin/sh -l
 
-if [ -n "$1" ]
+sourceDirectory = $1
+language = $2
+
+if [ -n "$sourceDirectory" ]
 then
-    echo "Source directory provided: '$1'"
+    echo "Source directory provided: '$sourceDirectory'"
 else
     echo "No source directory provided."
 fi
 
-if [ -n "$2" ]
+if [ -n "$language" ]
 then
-    echo "Language provided: '$2'"
+    echo "Language provided: '$language'"
 else
     echo "No language provided."
 fi
