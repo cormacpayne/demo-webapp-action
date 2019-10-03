@@ -1,5 +1,5 @@
 name: 'Oryx Demo Action'
-description: 'Build and deploy an Azure WebApp'
+description: 'Build an Azure WebApp using Oryx.'
 branding:
   icon: cloud
   color: white
