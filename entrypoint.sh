@@ -1,7 +1,8 @@
 #!/bin/sh -l
 
 sourceDirectory=$1
-language=$2
+platform=$2
+platformVersion=$3
 
 if [ -n "${sourceDirectory}" ]
 then
@@ -15,12 +16,20 @@ fi
 echo "Source directory: ${sourceDirectory}"
 oryxCommand="oryx build ${sourceDirectory}"
 
-if [ -n "$language" ]
+if [ -n "$platform" ]
 then
-    echo "Language provided: '${language}'"
-    oryxCommand="${oryxCommand} --platform ${language}"
+    echo "Platform provided: '${platform}'"
+    oryxCommand="${oryxCommand} --platform ${platform}"
 else
-    echo "No language provided -- Oryx will enumerate the repository to determine the platform."
+    echo "No platform provided -- Oryx will enumerate the repository to determine the platform."
+fi
+
+if [ -n "$platformVersion" ]
+then
+    echo "Platform version provided: ${platformVersion}''"
+    oryxCommand="${oryxCommand} --platform-version ${platformVersion}"
+else
+    echo "No platform version provided -- Oryx will determine the version."
 fi
 
 echo "Running command '${oryxCommand}'"
