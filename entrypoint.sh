@@ -2,19 +2,25 @@
 
 sourceDirectory=$1
 language=$2
+oryxCommand="'docker.io/oryxprod/build:slim' oryx build /repo"
 
-if [ -n "$sourceDirectory" ]
+if [ -n "${sourceDirectory}" ]
 then
-    echo "Source directory provided: '$sourceDirectory'"
+    echo "Source directory provided: '${sourceDirectory}'"
 else
     echo "No source directory provided."
+    sourceDirectory=$PWD
 fi
+
+oryxCommand="docker run --volume ${sourceDirectory}:/repo ${oryxCommand}"
 
 if [ -n "$language" ]
 then
-    echo "Language provided: '$language'"
+    echo "Language provided: '${language}'"
+    oryxCommand="${oryxCommand} --platform ${language}"
 else
     echo "No language provided."
 fi
 
-oryx build --help
+echo "Preparing to run Oryx command: ${oryxCommand}"
+# eval $oryxCommand
