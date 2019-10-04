@@ -41,3 +41,5 @@ fi
 
 echo -e "Running command '${oryxCommand}'\n"
 eval $oryxCommand
+
+echo ::set-output name=outputDirectory::$outputDirectory

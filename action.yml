@@ -16,6 +16,9 @@ inputs:
   platformVersion:
     description: 'The version of the programming platform.'
     required: false
+outputs:
+  outputDirectory:
+    description: 'The directory where the output of the build will be copied to.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
