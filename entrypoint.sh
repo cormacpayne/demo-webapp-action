@@ -1,36 +1,43 @@
 #!/bin/sh -l
 
 sourceDirectory=$1
-platform=$2
-platformVersion=$3
+outputDirectory=$2
+platform=$3
+platformVersion=$4
 
 if [ -n "${sourceDirectory}" ]
 then
-    echo "Source directory provided -- appending this directory to the current working directory."
-    sourceDirectory="$PWD/${sourceDirectory}"
+    echo -e "Source directory provided : ${sourceDirectory}\n"
 else
-    echo "No source directory provided -- using the current working directory."
     sourceDirectory=$PWD
+    echo -e "No source directory provided -- using the current working directory: ${sourceDirectory}\n"
 fi
 
-echo "Source directory: ${sourceDirectory}"
 oryxCommand="oryx build ${sourceDirectory}"
 
-if [ -n "$platform" ]
+if [ -n "${outputDirectory}" ]
 then
-    echo "Platform provided: '${platform}'"
+    echo -e "Output directory provided: '${outputDirectory}'\n"
+    oryxCommand="${oryxCommand} --output ${outputDirectory}"
+else
+    echo -e "No output directory provided -- the source directory will be used as the output directory.\n"
+fi
+
+if [ -n "${platform}" ]
+then
+    echo -e "Platform provided: '${platform}'\n"
     oryxCommand="${oryxCommand} --platform ${platform}"
 else
-    echo "No platform provided -- Oryx will enumerate the repository to determine the platform."
+    echo -e "No platform provided -- Oryx will enumerate the repository to determine the platform.\n"
 fi
 
-if [ -n "$platformVersion" ]
+if [ -n "${platformVersion}" ]
 then
-    echo "Platform version provided: ${platformVersion}''"
+    echo -e "Platform version provided: '${platformVersion}'\n"
     oryxCommand="${oryxCommand} --platform-version ${platformVersion}"
 else
-    echo "No platform version provided -- Oryx will determine the version."
+    echo -e "No platform version provided -- Oryx will determine the version.\n"
 fi
 
-echo "Running command '${oryxCommand}'"
+echo -e "Running command '${oryxCommand}'\n"
 eval $oryxCommand
