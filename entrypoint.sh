@@ -53,4 +53,4 @@ echo
 echo "Running command '${oryxCommand}'"
 eval $oryxCommand
 
-echo ::set-output name=outputDockerfile::$outputDockerfile
+echo ::set-output name=dockerfilePath::$outputDockerfile
