@@ -1,45 +1,56 @@
 #!/bin/sh -l
 
 sourceDirectory=$1
-outputDirectory=$2
+outputDockerfile=$2
 platform=$3
 platformVersion=$4
 
+echo
+
 if [ -n "${sourceDirectory}" ]
 then
-    echo -e "Source directory provided : ${sourceDirectory}\n"
+    echo "Source directory provided : ${sourceDirectory}"
 else
     sourceDirectory=$PWD
-    echo -e "No source directory provided -- using the current working directory: ${sourceDirectory}\n"
+    echo "No source directory provided -- using the current working directory: ${sourceDirectory}"
 fi
 
 oryxCommand="oryx build ${sourceDirectory}"
 
-if [ -n "${outputDirectory}" ]
+echo
+
+if [ -n "${outputDockerfile}" ]
 then
-    echo -e "Output directory provided: '${outputDirectory}'\n"
-    oryxCommand="${oryxCommand} --output ${outputDirectory}"
+    echo "Output Dockerfile provided: '${outputDockerfile}'"
 else
-    echo -e "No output directory provided -- the source directory will be used as the output directory.\n"
+    echo "No output Dockerfile provided -- the generated Dockerfile will be written to Dockerfile.oryx in the source directory."
+    outputDockerfile="${sourceDirectory}/Dockerfile.oryx"
 fi
+
+oryxCommand="${oryxCommand} --output ${outputDockerfile}"
+
+echo
 
 if [ -n "${platform}" ]
 then
-    echo -e "Platform provided: '${platform}'\n"
+    echo "Platform provided: '${platform}'"
     oryxCommand="${oryxCommand} --platform ${platform}"
 else
-    echo -e "No platform provided -- Oryx will enumerate the repository to determine the platform.\n"
+    echo "No platform provided -- Oryx will enumerate the repository to determine the platform."
 fi
+
+echo
 
 if [ -n "${platformVersion}" ]
 then
-    echo -e "Platform version provided: '${platformVersion}'\n"
+    echo "Platform version provided: '${platformVersion}'"
     oryxCommand="${oryxCommand} --platform-version ${platformVersion}"
 else
-    echo -e "No platform version provided -- Oryx will determine the version.\n"
+    echo "No platform version provided -- Oryx will determine the version."
 fi
 
-echo -e "Running command '${oryxCommand}'\n"
+echo
+echo "Running command '${oryxCommand}'"
 eval $oryxCommand
 
-echo ::set-output name=outputDirectory::$outputDirectory
+echo ::set-output name=outputDockerfile::$outputDockerfile
