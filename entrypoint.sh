@@ -5,6 +5,8 @@ outputDirectory=$2
 platform=$3
 platformVersion=$4
 
+echo -e "Checking HOME environment variable: '${HOME}'\n"
+
 if [ -n "${sourceDirectory}" ]
 then
     echo -e "Source directory provided : ${sourceDirectory}\n"
